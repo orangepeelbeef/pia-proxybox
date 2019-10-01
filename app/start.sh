@@ -76,9 +76,10 @@ if [ ! -f /app/runonce ]; then
 	# add UID/GID or use existing
   grep -qw ^torrents /etc/group || addgroup -g $DELUGE_GID torrents
 	grep -qw ^torrents /etc/passwd || adduser -G torrents -u $DELUGE_UID torrents
+  # allow other containers in same network to access squid
   INSIDE_NET=`ip -o -f inet addr show dev eth0 | awk '{ print $4 }'`
   #ipcalc sets NETWORK and PREFIX env variables for us
-  ipcalc -n $INSIDE_NET -p
+  export `ipcalc -n -p $INSIDE_NET`
   cat >> /etc/squid/squid.conf << EOL
 # our subnet
 acl my_subnet src $HOST_SUBNET
@@ -88,19 +89,12 @@ http_access allow localhost
 http_access deny all
 EOL
 
-
    # set runonce so it... runs once
    touch /app/runonce
-
 fi
 
 chown -R $DELUGE_UID:$DELUGE_GID /app/deluge
 chown -R $DELUGE_UID:$DELUGE_GID /torrents
 
-# set dns to unbound
-sv start unbound
-sed "s/^nameserver\s.*$/nameserver 127.0.0.1/" -i /etc/resolv.conf
-
 # spin it up
 exec /sbin/runsvdir /etc/service
-                          
