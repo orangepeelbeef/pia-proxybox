@@ -1,5 +1,6 @@
 #!/bin/bash
 
-
+# make sure unbound is running
+sv start unbound
 # start up openvpn
 exec /usr/sbin/openvpn --cd /etc/openvpn --config /etc/openvpn/default.conf --redirect-gateway

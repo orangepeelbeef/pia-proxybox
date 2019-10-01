@@ -4,4 +4,4 @@ sv start openvpn || exit 1
 sv start deluged || exit 1
 sleep 5
 # start up openvpn
-exec su torrents -c "/usr/bin/deluge-web -c /app/deluge --loglevel=info -d"
+exec su torrents -c "/usr/bin/deluge-web -c /app/deluge --loglevel=error -d"

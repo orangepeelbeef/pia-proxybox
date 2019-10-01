@@ -75,7 +75,7 @@ if [ ! -f /app/runonce ]; then
 
 	# add UID/GID or use existing
   grep -qw ^torrents /etc/group || addgroup -g $DELUGE_GID torrents
-	grep -qw ^torrents /etc/passwd || adduser -G torrents -u $DELUGE_UID torrents
+  grep -qw ^torrents /etc/passwd || adduser -D -G torrents -u $DELUGE_UID torrents
   # allow other containers in same network to access squid
   INSIDE_NET=`ip -o -f inet addr show dev eth0 | awk '{ print $4 }'`
   #ipcalc sets NETWORK and PREFIX env variables for us
