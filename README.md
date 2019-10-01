@@ -23,6 +23,12 @@ docker run -d \
 -e "PIA_USER=<pia_username>" \
 -e "PIA_PASS=<pia_password>" \
 -e "PIA_GATEWAY=<pia gateway dns address>" \
+-e "DELUGE_UID=1000" \
+-e "DELUGE_GID=1000" \
+-e "HOST_SUBNET=<host subnet eg: 192.168.0.0/24>" \
+-v /location/to/torrents:/torrents \
+-v /location/to/app/deluge:/app/deluge \
+-v /etc/localtime:/etc/localtime:ro \
 -p 1080:1080 \
 -p 8112:8112 \
 -p 3128:3128
