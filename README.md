@@ -18,6 +18,7 @@ If you don't have one, you can [sign up here](https://www.privateinternetaccess.
 docker run -d \
 --cap-add=NET_ADMIN \
 --device=/dev/net/tun \
+--dns=127.0.0.1 \
 --name=pia-proxybox \
 --restart=always \
 -e "PIA_USER=<pia_username>" \
