@@ -1,6 +1,6 @@
 # A collection of proxy tools via Private Internet Access.
 
-An [Alpine](https://alpinelinux.org/) Linux container running:
+An [Ubuntu](https://ubuntu.org/) Linux container running:
  1. socks5 proxy (using [dante](https://www.inet.no/dante/))
  2. http proxy (using [squid](https://www.squid.org/))
  3. Torrents ( using [deluge](https://www.deluge.org/))
