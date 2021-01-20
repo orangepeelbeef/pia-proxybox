@@ -1,3 +1,0 @@
-#!/bin/bash
-
-exec /usr/sbin/squid -YC -f /etc/squid/squid.conf --foreground

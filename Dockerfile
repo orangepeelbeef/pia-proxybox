@@ -1,19 +1,21 @@
-FROM alpine:latest
+FROM ubuntu:18.04
 MAINTAINER "OJ LaBoeuf <orangepeelbeef@gmail.com>"
 
-EXPOSE 1080 8112 3128
+COPY openvpn_manual /openvpn_manual
+COPY run_scripts /run_scripts
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-        echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
-        echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories && \
-        apk add -q --progress --no-cache --update squid bash openvpn dante-server ca-certificates unbound wget curl runit deluge && \
-        wget -q https://raw.githubusercontent.com/qdm12/updated/master/files/named.root.updated -O /etc/unbound/root.hints && \
-        wget -q https://raw.githubusercontent.com/qdm12/updated/master/files/root.key.updated -O /etc/unbound/root.key && \
-        chmod 440 /etc/unbound/root.hints /etc/unbound/root.key && \
-        chown root:unbound /etc/unbound/root.hints /etc/unbound/root.key && \
-        rm -rf /*.zip /var/cache/apk/*
+ARG DEBIAN_FRONTEND=noninteractive
 
-COPY app/ /app/
-COPY etc/ /etc/
+RUN apt-get update --quiet && \
+ apt-get install -y supervisor squid dante-server deluged deluge-web deluge-console openvpn curl jq git python-pip ipcalc inotify-tools && \
+ apt-get upgrade --quiet --allow-downgrades --allow-remove-essential --allow-change-held-packages -y && \
+ pip install supervisor-stdout && \
+ apt-get clean --quiet && \
+ rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+ mkdir -p /var/log/supervisor
 
-CMD ["/app/start.sh"]
+COPY conf/danted.conf /etc/
+COPY conf/squid.conf /etc/squid/squid.conf.tmpl
+COPY conf/supervisord.conf /etc/supervisor/supervisord.conf
+
+ENTRYPOINT ["/usr/bin/supervisord"]
