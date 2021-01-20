@@ -1,0 +1,27 @@
+version: '3'
+services:
+  pia_proxybox:
+    build: https://github.com/orangepeelbeef/pia-proxybox.git
+    container_name: pia-proxyboxng
+    image: orangepeelbeef/pia-proxyboxng
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment:
+      - DELUGE_UID=1000 
+      - DELUGE_GID=1000 
+      - HOST_SUBNET=192.168.0.0/24 
+      - PIA_USER=PIA-USERNAME
+      - PIA_PASS=PIA-PASSWORD
+      - REGION_ID=ro 
+    networks:
+      - pia_proxybox
+    ports:
+      - 1080:1080
+      - 8112:8112
+      - 3128:3128
+    restart: always
+
+networks:
+  pia_proxybox:
