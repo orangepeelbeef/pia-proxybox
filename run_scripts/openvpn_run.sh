@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /openvpn_manual/
-REGIONDATA=`curl -s https://serverlist.piaservers.net/vpninfo/servers/v4 | jq --arg REGION_ID ro -r '.regions[] | select(.id==$REGION_ID)'`
+REGIONDATA=`curl -s https://serverlist.piaservers.net/vpninfo/servers/v4 | head -1 | jq --arg REGION_ID ${REGION_ID} -r '.regions[] | select(.id==$REGION_ID)'`
 
 META_HOSTNAME=`echo $REGIONDATA | jq -r '.servers.meta[0].cn'`
 META_IP=`echo $REGIONDATA | jq -r '.servers.meta[0].ip'`
