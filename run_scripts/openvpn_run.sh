@@ -8,9 +8,7 @@ OU_HOSTNAME=`echo $REGIONDATA | jq -r '.servers.ovpnudp[0].cn'`
 OU_IP=`echo $REGIONDATA | jq -r '.servers.ovpnudp[0].ip'`
 
 generateTokenResponse=$(curl -s -u "$PIA_USER:$PIA_PASS" \
-  --resolve "$META_HOSTNAME:443:$META_IP" \
-  --cacert "ca.rsa.4096.crt" \
-  "https://$META_HOSTNAME/authv3/generateToken")
+  "https://privateinternetaccess.com/gtoken/generateToken")
 
 echo "$generateTokenResponse"
 
