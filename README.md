@@ -1,9 +1,9 @@
 # A collection of proxy tools via Private Internet Access.
 
 An [Ubuntu](https://ubuntu.org/) Linux container running:
- 1. socks5 proxy (using [dante](https://www.inet.no/dante/))
- 2. http proxy (using [squid](https://www.squid.org/))
- 3. Torrents ( using [deluge](https://www.deluge.org/))
+ 1. socks5 proxy (using [dante](https://www.inet.no/dante/)) port 1080
+ 2. http proxy (using [squid](https://www.squid.org/)) port 3128
+ 3. Torrents ( using [deluge](https://www.deluge.org/)) webui on port 8112
 
 all via Private Internet Access (OpenVPN).
 
