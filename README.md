@@ -51,7 +51,7 @@ docker-compose up -d
 `REGION_ID` - DNS to the PIA server in desired region eg: ro 
 
 See the serverlist filtered with port forwarding support
-eg: curl -s https://serverlist.piaservers.net/vpninfo/servers/v4 | head -1 | jq -r '.regions[] | select(.port_forward==true) | .id '
+eg: ```curl -s https://serverlist.piaservers.net/vpninfo/servers/v4 | head -1 | jq -r '.regions[] | select(.port_forward==true) | .id '```
  
 `PIA_USER` / `PIA_PASS` - Credentials to connect to PIA
 
