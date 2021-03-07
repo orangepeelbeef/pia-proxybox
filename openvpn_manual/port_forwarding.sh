@@ -115,6 +115,7 @@ while true; do
     export bind_port_response
     if [ "$(echo "$bind_port_response" | jq -r '.status')" != "OK" ]; then
       echo "The API did not return OK when trying to bind port. Exiting."
+      /run_scripts/openvpn_kill.sh
       exit 1
     fi
     echo Port $port refreshed on $(date). \
