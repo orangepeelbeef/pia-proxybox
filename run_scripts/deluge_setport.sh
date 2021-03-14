@@ -1,6 +1,6 @@
 #!/bin/bash
-inotifywait -q -m -e close_write /opt/piavpn-manual/portforward_info |
-while read events; do
+sleep 10
+setport () {
   LOCAL_IP=`ip -o -f inet addr show dev tun06 | awk '{ print $4 }' | cut -f 1 -d '/'`
   PORT=`cat /opt/piavpn-manual/portforward_info`
   if [[ $PORT =~ ^-?[0-9]+$ ]]
@@ -13,4 +13,11 @@ while read events; do
     echo ERROR: Port $PORT is not an integer
     echo "DEBUG: ${DEBUG}"
   fi
+}
+
+setport
+
+inotifywait -q -m -e close_write /opt/piavpn-manual/portforward_info |
+while read events; do
+  setport
 done

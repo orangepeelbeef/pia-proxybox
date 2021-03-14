@@ -1,2 +1,3 @@
 #!/bin/bash
-exec su torrents -c "/usr/bin/deluge-web -c /app/deluge --loglevel=error"
+sleep 10
+exec su torrents -c "/usr/bin/deluge-web -d -c /app/deluge --loglevel=error"
