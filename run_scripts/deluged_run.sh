@@ -29,6 +29,8 @@ w
     cp /tmp/deluge-core.conf /app/deluge/core.conf
     cp /tmp/deluge-label.conf /app/deluge/label.conf
     chown -R torrents:torrents /app/deluge
+    chown -R torrents:torrents /torrents
+    chown -R torrents:torrents /complete
     touch /app/deluge/.skipsetup
   fi
 
