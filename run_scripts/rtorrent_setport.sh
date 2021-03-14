@@ -5,10 +5,10 @@ while read events; do
   PORT=`cat /opt/piavpn-manual/portforward_info`
   if [[ $PORT =~ ^-?[0-9]+$ ]]
   then
-    echo [set-deluge-port] Local IP=$LOCAL_IP, Port=$PORT, Client ID=setport
-    deluge-console -c /app/deluge "config --set random_port False"
-    deluge-console -c /app/deluge "config --set listen_ports ($PORT,$PORT)"
-    deluge-console -c /app/deluge "config --set listen_interface $LOCAL_IP"
+    echo [set-rtorrent-port] Local IP=$LOCAL_IP, Port=$PORT, Client ID=setport
+    #edit rtorrent.rc to set new port and kill rtorrent
+    sed -i "s/network\.port_range\.set.*/network.port_range.set = ${PORT}-${PORT}/g" rtorrent.rc
+    killall -w -s 2 /usr/bin/rtorrent  
   else
     echo ERROR: Port $PORT is not an integer
     echo "DEBUG: ${DEBUG}"

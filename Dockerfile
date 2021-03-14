@@ -7,7 +7,7 @@ COPY run_scripts /run_scripts
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update --quiet && \
- apt-get install -y supervisor squid dante-server deluged deluge-web deluge-console openvpn curl jq git python-pip ipcalc inotify-tools && \
+ apt-get install -y supervisor squid dante-server rtorrent psmisc screen openvpn curl jq git python-pip ipcalc inotify-tools && \
  apt-get upgrade --quiet --allow-downgrades --allow-remove-essential --allow-change-held-packages -y && \
  pip install supervisor-stdout && \
  apt-get clean --quiet && \
@@ -16,6 +16,7 @@ RUN apt-get update --quiet && \
 
 COPY conf/danted.conf /etc/
 COPY conf/squid.conf /etc/squid/squid.conf.tmpl
+COPY conf/rtorrent.rc /tmp/rtorrent.rc.tmpl
 COPY conf/supervisord.conf /etc/supervisor/supervisord.conf
 
 ENTRYPOINT ["/usr/bin/supervisord"]
