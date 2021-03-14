@@ -1,4 +1,5 @@
 #!/bin/bash
+w
 #sanity check uid/gid
   if [ $DELUGE_UID -ne 0 -o $DELUGE_UID -eq 0 2>/dev/null ]; then
         if [ $DELUGE_UID -lt 100 -o $DELUGE_UID -gt 65535 ]; then
@@ -24,4 +25,18 @@
   grep -qw ^torrents /etc/group || addgroup --gid $DELUGE_GID torrents
   grep -qw ^torrents /etc/passwd || adduser --ingroup torrents --disabled-password -gecos '' -u $DELUGE_UID torrents 
 
-su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info -l /app/deluge/deluged.log"
+  if [[ ! -f /app/deluge/.skipsetup ]]; then
+    cp /tmp/deluge-core.conf /app/deluge/core.conf
+    cp /tmp/deluge-label.conf /app/deluge/label.conf
+    chown -R torrents:torrents /app/deluge
+    chown -R torrents:torrents /torrents
+    chown -R torrents:torrents /complete
+    touch /app/deluge/.skipsetup
+  fi
+
+  # wait for tun06(vpn) to come up
+  while [[ ! `ip add sh dev tun06 | grep inet | wc -l` ]]; do
+        sleep 10
+  done
+
+  su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info -l /app/deluge/deluged.log"
