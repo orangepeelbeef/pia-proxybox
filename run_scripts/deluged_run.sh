@@ -22,6 +22,6 @@
 
         # add UID/GID or use existing
   grep -qw ^torrents /etc/group || addgroup --gid $DELUGE_GID torrents
-  grep -qw ^torrents /etc/passwd || adduser --ingroup torrents --disabled-password -u $DELUGE_UID torrents 
+  grep -qw ^torrents /etc/passwd || adduser --ingroup torrents --disabled-password -gecos '' -u $DELUGE_UID torrents 
 
 su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info -l /app/deluge/deluged.log"
