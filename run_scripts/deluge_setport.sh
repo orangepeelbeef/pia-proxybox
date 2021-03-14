@@ -1,5 +1,4 @@
 #!/bin/bash
-sleep 10
 setport () {
   LOCAL_IP=`ip -o -f inet addr show dev tun06 | awk '{ print $4 }' | cut -f 1 -d '/'`
   PORT=`cat /opt/piavpn-manual/portforward_info`
@@ -14,6 +13,11 @@ setport () {
     echo "DEBUG: ${DEBUG}"
   fi
 }
+
+# wait for tun06(vpn) to come up
+while [[ ! `ip add sh dev tun06 | grep inet | wc -l` ]]; do
+        sleep 10
+done
 
 setport
 

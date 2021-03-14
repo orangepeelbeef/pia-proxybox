@@ -1,4 +1,5 @@
 #!/bin/bash
+w
 #sanity check uid/gid
   if [ $DELUGE_UID -ne 0 -o $DELUGE_UID -eq 0 2>/dev/null ]; then
         if [ $DELUGE_UID -lt 100 -o $DELUGE_UID -gt 65535 ]; then
@@ -30,5 +31,10 @@
     chown -R torrents:torrents /app/deluge
     touch /app/deluge/.skipsetup
   fi
+
+  # wait for tun06(vpn) to come up
+  while [[ ! `ip add sh dev tun06 | grep inet | wc -l` ]]; do
+        sleep 10
+  done
 
   su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info -l /app/deluge/deluged.log"

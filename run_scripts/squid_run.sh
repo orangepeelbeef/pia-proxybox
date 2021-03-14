@@ -32,4 +32,9 @@ http_access allow localhost
 http_access deny all
 EOL
 
+# wait for tun06(vpn) to come up
+while [[ ! `ip add sh dev tun06 | grep inet | wc -l` ]]; do
+        sleep 10
+done
+
 /usr/sbin/squid -YC -f /etc/squid/squid.conf -N
