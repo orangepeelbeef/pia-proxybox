@@ -21,7 +21,16 @@ services:
       - 1080:1080
       - 8112:8112
       - 3128:3128
+    volumes:
+      - /opt/incoming/deluge/in_progress:/torrents
+      - /opt/incoming/deluge/blackhole:/torrentblackhole
+      - /opt/incoming/deluge/complete:/complete
+      - deluge:/app/deluge
+      - /etc/localtime:/etc/localtime
     restart: always
+
+volumes:
+    deluge:
 
 networks:
   pia_proxybox:
