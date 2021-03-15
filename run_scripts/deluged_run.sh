@@ -31,6 +31,7 @@ w
     chown -R torrents:torrents /app/deluge
     chown -R torrents:torrents /torrents
     chown -R torrents:torrents /complete
+    chown -R torrents:torrents /torrentblackhole
     touch /app/deluge/.skipsetup
   fi
 
