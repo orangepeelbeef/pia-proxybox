@@ -61,3 +61,5 @@ To connect to the VPN Proxy, set your browser socks5 proxy to localhost:1080.
 
 ## CREDITS
 https://github.com/pia-foss/manual-connections
+
+[![Publish Docker image](https://github.com/orangepeelbeef/pia-proxybox/actions/workflows/main.yml/badge.svg)](https://github.com/orangepeelbeef/pia-proxybox/actions/workflows/main.yml)
