@@ -8,7 +8,7 @@ OU_HOSTNAME=`echo $REGIONDATA | jq -r '.servers.ovpnudp[0].cn'`
 OU_IP=`echo $REGIONDATA | jq -r '.servers.ovpnudp[0].ip'`
 
 generateTokenResponse=$(curl -s -u "$PIA_USER:$PIA_PASS" \
-  "https://privateinternetaccess.com/gtoken/generateToken")
+  "https://www.privateinternetaccess.com/gtoken/generateToken")
 
 echo "$generateTokenResponse"
 
