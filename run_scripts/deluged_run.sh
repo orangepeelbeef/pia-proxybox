@@ -35,9 +35,14 @@ w
     touch /app/deluge/.skipsetup
   fi
 
+  # install ltconfig plugin to allow for tweaking libtorrent settings
+  if [[ ! -f /app/deluge/plugins/ltConfig-2.0.0.egg ]]; then
+    curl -L https://github.com/ratanakvlun/deluge-ltconfig/releases/download/v2.0.0/ltConfig-2.0.0.egg --output /app/deluge/plugins/ltConfig-2.0.0.egg
+  fi
+
   # wait for tun06(vpn) to come up
   while [[ ! `ip add sh dev tun06 | grep inet | wc -l` ]]; do
         sleep 10
   done
 
-  su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info -l /app/deluge/deluged.log"
+  su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info"

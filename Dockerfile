@@ -7,6 +7,9 @@ COPY run_scripts /run_scripts
 ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update --quiet && \
+ apt-get install -y software-properties-common && \
+ add-apt-repository ppa:deluge-team/stable && \
+ apt-get update --quiet && \
  apt-get install -y supervisor squid dante-server deluged deluge-web deluge-console openvpn curl jq git python3-pip ipcalc inotify-tools && \
  apt-get upgrade --quiet --allow-downgrades --allow-remove-essential --allow-change-held-packages -y && \
  pip3 install git+https://github.com/coderanger/supervisor-stdout && \
