@@ -13,6 +13,8 @@ RUN apt-get update --quiet && \
  apt-get install -y supervisor squid dante-server deluged deluge-web deluge-console openvpn curl jq git python3-pip ipcalc inotify-tools && \
  apt-get upgrade --quiet --allow-downgrades --allow-remove-essential --allow-change-held-packages -y && \
  pip3 install git+https://github.com/coderanger/supervisor-stdout && \
+ apt-get remove build-essential -y && \
+ apt-get autoremove -y && \
  apt-get clean --quiet && \
  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
  mkdir -p /var/log/supervisor
