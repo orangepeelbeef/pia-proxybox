@@ -36,7 +36,7 @@ w
   fi
 
   # install ltconfig plugin to allow for tweaking libtorrent settings
-  if [[ ! -f /app/deluge/plugins/ltConfig-2.0.0.egg]]; then
+  if [[ ! -f /app/deluge/plugins/ltConfig-2.0.0.egg ]]; then
     curl -L https://github.com/ratanakvlun/deluge-ltconfig/releases/download/v2.0.0/ltConfig-2.0.0.egg --output /app/deluge/plugins/ltConfig-2.0.0.egg
   fi
 
@@ -45,4 +45,4 @@ w
         sleep 10
   done
 
-  su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info -l /app/deluge/deluged.log"
+  su torrents -c "/usr/bin/deluged -c /app/deluge -d --loglevel=info"
