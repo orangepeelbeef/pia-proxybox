@@ -37,4 +37,4 @@ while [[ ! `ip add sh dev tun06 | grep inet | wc -l` ]]; do
         sleep 10
 done
 
-/usr/sbin/squid -YC -f /etc/squid/squid.conf -N
+tail -vn 0 -F /var/log/squid/{cache,access}.log & /usr/sbin/squid -YC -f /etc/squid/squid.conf -N

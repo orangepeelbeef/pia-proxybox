@@ -4,6 +4,7 @@ An [Ubuntu](https://ubuntu.org/)20.04 Linux container running:
  1. socks5 proxy (using [dante](https://www.inet.no/dante/)) port 1080
  2. http proxy (using [squid](https://www.squid.org/)) port 3128
  3. Torrents ( using [deluge](https://www.deluge.org/)) webui on port 8112
+ 4. Supervisord webui port 9009 (skip this port if you don't want it available)
 
 all via Private Internet Access (OpenVPN).
 
@@ -33,7 +34,8 @@ docker run -d \
 -p 1080:1080 \
 -p 8112:8112 \
 -p 3128:3128
-orangepeelbeef/pia-proxyboxng
+-p 9009:9009
+orangepeelbeef/pia-proxyboxng:latest
 ```
 
 Substitute the environment variables for `REGION_ID`, `PIA_USER`, `PIA_PASS` as indicated.
