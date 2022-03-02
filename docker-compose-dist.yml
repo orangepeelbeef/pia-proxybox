@@ -22,6 +22,7 @@ services:
       - 8112:8112
       - 3128:3128
       - 9009:9009
+      - 9150:9150
     volumes:
       - /path/to/torrents:/torrents
       - /path/to/torrentblackhole:/torrentblackhole

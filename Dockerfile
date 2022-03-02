@@ -10,9 +10,10 @@ RUN apt-get update --quiet && \
  apt-get install -y software-properties-common && \
  add-apt-repository ppa:deluge-team/stable && \
  apt-get update --quiet && \
- apt-get install -y supervisor squid dante-server deluged deluge-web deluge-console openvpn curl jq git python3-pip ipcalc inotify-tools && \
+ apt-get install -y supervisor squid dante-server deluged deluge-web deluge-console openvpn curl jq git python3-pip ipcalc inotify-tools tor vim-tiny && \
  apt-get upgrade --quiet --allow-downgrades --allow-remove-essential --allow-change-held-packages -y && \
  pip3 install git+https://github.com/coderanger/supervisor-stdout && \
+ chsh -s /bin/bash debian-tor && \
  apt-get remove build-essential -y && \
  apt-get autoremove -y && \
  apt-get clean --quiet && \
@@ -23,5 +24,7 @@ COPY conf/danted.conf /etc/
 COPY conf/squid.conf /etc/squid/squid.conf.tmpl
 COPY conf/supervisord.conf /etc/supervisor/supervisord.conf
 COPY conf/deluge*.conf /tmp/
+COPY conf/torrc /etc/tor/torrc
+
 
 ENTRYPOINT ["/usr/bin/supervisord"]
