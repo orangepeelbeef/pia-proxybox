@@ -33,8 +33,8 @@ docker run -d \
 -v /etc/localtime:/etc/localtime:ro \
 -p 1080:1080 \
 -p 8112:8112 \
--p 3128:3128
--p 9009:9009
+-p 3128:3128 \
+-p 9009:9009 \
 orangepeelbeef/pia-proxyboxng:latest
 ```
 
