@@ -19,7 +19,7 @@ RUN apt-get update --quiet && \
  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
  mkdir -p /var/log/supervisor
 
-COPY conf/danted.conf /etc/
+COPY conf/danted.conf /etc/danted.conf.tmpl
 COPY conf/squid.conf /etc/squid/squid.conf.tmpl
 COPY conf/supervisord.conf /etc/supervisor/supervisord.conf
 COPY conf/deluge*.conf /tmp/

@@ -4,6 +4,6 @@ if [[ -z $1 ]]; then
   exit 1
 fi
 echo $1
-docker pull Ubuntu:20.04 
+docker pull ubuntu:20.04 
 docker build . -t orangepeelbeef/pia-proxyboxng:$1 --no-cache
 #docker push orangepeelbeef/pia-proxyboxng:$1

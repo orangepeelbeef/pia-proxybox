@@ -1,9 +1,8 @@
-version: '3'
 services:
   pia_proxybox:
     build: https://github.com/orangepeelbeef/pia-proxybox.git
     container_name: pia-proxyboxng
-    image: orangepeelbeef/pia-proxyboxng
+    image: orangepeelbeef/pia-proxyboxng:latest
     cap_add:
       - NET_ADMIN
     devices:
